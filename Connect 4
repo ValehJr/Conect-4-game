@@ -1,0 +1,231 @@
+"""THE CONNECT 4 GAME"""
+def table(l6,l5,l4,l3,l2,l1):
+    '''
+        The function to print table every time needed.
+    
+    : param l6: list for discs on bottom row on table
+    : type l6: list 
+    : param l5: list for discs on the second row from bottom on table
+    : type l5: list
+    : param l4: list for discs on the third row from bottom on table
+    : type l4: list 
+    : param l3: list for discs on the third row from top on table
+    : type l3: list 
+    : param l2: list for discs on the second row from top on table
+    : type l2: list
+    : param l1: list for discs on the top row on table
+    : type l1: list 
+    '''
+
+    print( '  1', '2', '3', '4', '5', '6', '7')
+    print('6', l1[0],l1[1],l1[2],l1[3],l1[4],l1[5],l1[6], '6')
+    print('5', l2[0],l2[1],l2[2],l2[3],l2[4],l2[5],l2[6], '5')
+    print('4', l3[0],l3[1],l3[2],l3[3],l3[4],l3[5],l3[6], '4')
+    print('3', l4[0],l4[1],l4[2],l4[3],l4[4],l4[5],l4[6], '3')
+    print('2', l5[0],l5[1],l5[2],l5[3],l5[4],l5[5],l5[6], '2')
+    print('1', l6[0],l6[1],l6[2],l6[3],l6[4],l6[5],l6[6], '1')
+    print( '  1', '2', '3', '4', '5', '6', '7')
+
+def again():
+    '''
+        The function to restart the game
+    : param t: the input that checks if player wants to play again
+    : type t: string
+    '''
+    t = input("Do you want to play again? Enter Yes or No: ")
+
+    if t == 'Yes':
+        game()
+    if t == 'No':
+        print("THE END")
+
+def full_c1(l1,c1,l2,l3,l4,l5,l6,l):
+    
+    if l1[c1-1]!=' ' and l2[c1-1]!=' ' and l3[c1-1]!=' ' and l4[c1-1]!=' ' and l5[c1-1]!=' ' and l6[c1-1]!=' ':
+        print("!!Column is full, you cannot play here!!")
+        player_1(l1,l2,l3,l4,l5,l6,l)
+        return c1 
+
+def full_c2(l1,c2,l2,l3,l4,l5,l6,l):
+                                    
+    if l1[c2-1]!=' ' and l2[c2-1]!=' ' and l3[c2-1]!=' ' and l4[c2-1]!=' ' and l5[c2-1]!=' ' and l6[c2-1]!=' ':
+        print("!!Column is full, you cannot play here!!")
+        player_2(l1,l2,l3,l4,l5,l6,l)
+        return c2
+
+def player_1(l1,l2,l3,l4,l5,l6,l):
+    c1=int(input("First player,enter the column: "))
+    if c1 >= 8 or c1 == 0:
+            c1 = int(input("Choose column between 1 and 7: "))
+    full_c1(l1,c1,l2,l3,l4,l5,l6,l)
+        
+    for i in l:
+        if i[c1-1]==' ':
+            i[c1-1]="o"
+            break
+
+def player_2(l1,l2,l3,l4,l5,l6,l):
+    c2=int(input("Second player,enter the column: "))
+    if c2 >= 8 or c2 == 0:
+        c2 = int(input("Choose column between 1 and 7: "))
+    full_c2(l1,c2,l2,l3,l4,l5,l6,l)
+    
+    for j in l:
+        if j[c2-1]==' ':
+            j[c2-1]="*"
+            break
+
+def win_program(l6,l5,l4,l3,l2,l1,l):
+        '''
+            The function that checks if any player wins
+        
+        : param l6: list for discs on bottom row on table
+        : type l6: list 
+        : param l5: list for discs on the second row from bottom on table
+        : type l5: list
+        : param l4: list for discs on the third row from bottom on table
+        : type l4: list 
+        : param l3: list for discs on the third row from top on table
+        : type l3: list 
+        : param l2: list for discs on the second row from top on table
+        : type l2: list
+        : param l1: list for discs on the top row on table
+        : type l1: list 
+        : param l: list with all rows
+        : type l: list
+        '''
+
+        for n in range(3, 7):     #This part checks if someone wins diogonally from right to left
+
+            if l1[n] == l2[n-1] == l3[n-2] == l4[n-3]:        
+                if l1[n]=="o":
+                    return "First player wins!"
+                    
+                elif l1[n]=="*":
+                    return "Second player wins!"           
+
+            if l2[n] == l3[n-1] == l4[n-2] == l5[n-3]:
+                if l2[n]=="o":
+                    return "First player wins!"
+                elif l2[n]=="*":
+                    return "Second player wins!"
+
+            if l3[n] == l4[n-1] == l5[n-2] == l6[n-3]:
+                if l3[n]=="o":
+                    return "First player wins!"
+                    
+                elif l3[n]=="*":
+                    return "Second player wins!"
+                    
+        for m in range(4):      #This part checks if someone won diogonally from left to right
+
+            if l1[m] == l2[m+1] == l3 [m+2] == l4[m+3]:     
+                if l1[m]=="o":
+                    return "First player wins!"
+                    
+                elif l1[m]=="*":
+                    return "Second player wins!"
+                    
+            if l2[m] == l3[m+1] == l4[m+2] == l5[m+3]:  
+                if l2[m]=="o":
+                    return "First player wins!"
+                    
+                elif l2[m]=="*":
+                    return "Second player wins!"
+                    
+            if l3[m] == l4[m+1] == l5[m+2] == l6[m+3]:
+                if l3[m]=="o":
+                    return "First player wins!"
+                
+                elif l3[m]=="*":
+                    return "Second player wins!"
+                   
+        for u in range(7):     #This part checks if someone wins vertically
+
+            if l3[u]=="o":
+                if l1[u] == l2[u] == l3[u] == l4[u] or l2[u] == l3[u] == l4[u] == l5[u] or l3[u] == l4[u] == l5[u] == l6[u] :	#vertical
+                    return "First player wins!"
+
+            elif l3[u]=="*":
+                if l1[u] == l2[u] == l3[u] == l4[u] or l2[u] == l3[u] == l4[u] == l5[u] or l3[u] == l4[u] == l5[u] == l6[u] :
+                    return "Second player wins!"
+
+        for p in l:     #This part checks if someone won horizontally
+            for t in range (4):
+                if p[t]==p[t+1]==p[t+2]==p[t+3]:   
+                    
+                    if p[t]=="o":
+                        return "First player wins!"              
+
+                    elif p[t]=="*":
+                        return "Second player wins!"
+
+
+            
+
+def game():  
+
+    '''
+        The function that runs the  itself
+    : param l6: list for discs on bottom row on table
+    : type l6: list 
+    : param l5: list for discs on the second row from bottom on table
+    : type l5: list
+    : param l4: list for discs on the third row from bottom on table
+    : type l4: list 
+    : param l3: list for discs on the third row from top on table
+    : type l3: list 
+    : param l2: list for discs on the second row from top on table
+    : type l2: list
+    : param l1: list for discs on the top row on table
+    : type l1: list 
+    : param l: list with all row lists
+    : type l: listgame
+    : param c1: The column that first player wants to play
+    : type c1: integer
+    : param c2: The column that second player wants to play
+    : type c2: integer
+    : param a: the return of win_program() function
+    : type a: boolean
+    :
+    '''
+
+    l6 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    l5 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    l4 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    l3 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    l2 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    l1 = [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    
+    table(l6,l5,l4,l3,l2,l1)
+    l=[l6,l5,l4,l3,l2,l1]
+    c1=1
+    c2=1
+    while True:       
+        #At this part first player does his move and code runs a function to check if first player wins
+        
+        player_1(l1,l2,l3,l4,l5,l6,l)
+        
+        table(l6,l5,l4,l3,l2,l1)
+        
+        a=win_program(l6,l5,l4,l3,l2,l1,l)
+        if a!=None:
+            print(win_program(l6,l5,l4,l3,l2,l1,l))
+        if a=="First player wins!":
+            again()
+            break
+
+        #At this part second player does his move and code runs a function to check if second player wins
+        
+        player_2(l1,l2,l3,l4,l5,l6,l)
+        
+        table(l6,l5,l4,l3,l2,l1)
+
+        a=win_program(l6,l5,l4,l3,l2,l1,l)
+        if a!=None:
+            print(win_program(l6,l5,l4,l3,l2,l1,l))
+        if a=="Second player wins!":
+            again()
+            break
+
+game()
